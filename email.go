@@ -23,7 +23,7 @@ type Attachment struct {
 
 // Message represents a smtp message.
 type Message struct {
-	From            mail.Address
+	From            string
 	To              []string
 	Cc              []string
 	Bcc             []string
@@ -108,7 +108,7 @@ func (m *Message) Tolist() []string {
 func (m *Message) Bytes() []byte {
 	buf := bytes.NewBuffer(nil)
 
-	buf.WriteString("From: " + m.From.String() + "\r\n")
+	buf.WriteString("From: " + m.From + "\r\n")
 
 	t := time.Now()
 	buf.WriteString("Date: " + t.Format(time.RFC822) + "\r\n")
@@ -187,5 +187,5 @@ func (m *Message) Bytes() []byte {
 
 // Send sends the message.
 func Send(addr string, auth smtp.Auth, m *Message) error {
-	return smtp.SendMail(addr, auth, m.From.Address, m.Tolist(), m.Bytes())
+	return smtp.SendMail(addr, auth, m.From, m.Tolist(), m.Bytes())
 }
