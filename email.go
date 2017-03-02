@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"mime"
-	"net/mail"
 	"net/smtp"
 	"path/filepath"
 	"strings"
